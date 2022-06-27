@@ -34,7 +34,7 @@
 								<table class="button_block" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
 									<tr>
 										<td style="padding-bottom:20px;padding-left:10px;padding-right:10px;padding-top:10px;text-align:center;">
-											<a href="https://puppy.cologne/ticket/ticket.php?eventname=<?php echo $ticket['name'] ?>&ticketid=<?php echo $ticket['WooCommerceEventsTicketID']; ?>&name=<?php echo $ticket['WooCommerceEventsAttendeeName']; ?> <?php echo $ticket['WooCommerceEventsAttendeeLastName']; ?>&eventid=<?php echo $ticket['WooCommerceEventsProductID']; ?>&ort=<?php echo $ticket['WooCommerceEventsLocation']; ?>&start=<?php echo $ticket['WooCommerceEventsDate']; ?>&startt=<?php echo $ticket['WooCommerceEventsDateTimestamp']; ?>&endet=<?php echo $ticket['WooCommerceEventsEndDateTimestamp']; ?>&bild=<?php echo $ticket['WooCommerceEventsTicketHeaderImage']; ?>"><img src="https://puppy.cologne/wp-content/uploads/Apple_Wallet.svg" width="175"/></a>
+											<a href="<?php echo site_url(); ?>/wp-admin/admin-ajax.php?action=wallet&ticket=<?php echo $ticket['ID'] ?>&hash=<?php echo $ticket['WooCommerceEventsTicketHash']; ?>"><img src="<?php echo site_url(); ?>/wp-content/uploads/Apple_Wallet.svg" width="175"/></a>
 										</td>
 									</tr>
 								</table>
@@ -45,7 +45,7 @@
 									<!-- TICKETNUMMER -->
 									<tr>
 										<td style="text-align:center;width:50%;padding-top:25px;">
-											<h3 style="margin: 0; color: #909090; direction: ltr; font-family: Helvetica Neue, Helvetica, Arial, sans-serif; font-size: 13px; font-weight: 700; letter-spacing: normal; line-height: 200%; text-align: left; margin-top: 0; margin-bottom: 0;"><span class="tinyMce-placeholder">Ticketnummer</span></h3>
+											<h3 style="margin: 0; color: #909090; direction: ltr; font-family: Helvetica Neue, Helvetica, Arial, sans-serif; font-size: 13px; font-weight: 700; letter-spacing: normal; line-height: 200%; text-align: left; margin-top: 0; margin-bottom: 0;"><span class="tinyMce-placeholder">Ticketnummer:</span></h3>
 										</td>
 										<td style="text-align:center;width:50%;padding-top:25px;">
 											<div style="color:#0a0a0e;direction:ltr;font-family:Helvetica Neue, Helvetica, Arial, sans-serif;font-size:13px;font-weight:400;letter-spacing:0px;line-height:200%;text-align:left;">
@@ -57,7 +57,7 @@
 									<!-- TICKETINHABER -->
 									<tr>
 										<td style="text-align:center;">
-											<h3 style="margin: 0; color: #909090; direction: ltr; font-family: Helvetica Neue, Helvetica, Arial, sans-serif; font-size: 13px; font-weight: 700; letter-spacing: normal; line-height: 200%; text-align: left; margin-top: 0; margin-bottom: 0;"><span class="tinyMce-placeholder">Ticketinhaber</span></h3>
+											<h3 style="margin: 0; color: #909090; direction: ltr; font-family: Helvetica Neue, Helvetica, Arial, sans-serif; font-size: 13px; font-weight: 700; letter-spacing: normal; line-height: 200%; text-align: left; margin-top: 0; margin-bottom: 0;"><span class="tinyMce-placeholder">Ticketinhaber:</span></h3>
 										</td>
 										<td>
 											<div style="color:#0a0a0e;direction:ltr;font-family:Helvetica Neue, Helvetica, Arial, sans-serif;font-size:13px;font-weight:400;letter-spacing:0px;line-height:200%;text-align:left;">
@@ -66,10 +66,38 @@
 										</td>
 									</tr>
 									
+									<!-- Telefonnummer -->
+									<?php if ( ! empty( $ticket['WooCommerceEventsAttendeeTelephone'] ) ) : ?>
+									<tr>
+										<td style="text-align:center;">
+											<h3 style="margin: 0; color: #909090; direction: ltr; font-family: Helvetica Neue, Helvetica, Arial, sans-serif; font-size: 13px; font-weight: 700; letter-spacing: normal; line-height: 200%; text-align: left; margin-top: 0; margin-bottom: 0;"><span class="tinyMce-placeholder"><?php _e( 'Telephone Number:', 'woocommerce-events' ); ?></span></h3>
+										</td>
+										<td>
+											<div style="color:#0a0a0e;direction:ltr;font-family:Helvetica Neue, Helvetica, Arial, sans-serif;font-size:13px;font-weight:400;letter-spacing:0px;line-height:200%;text-align:left;">
+												<p style="margin: 0;"><?php echo $ticket['WooCommerceEventsAttendeeTelephone']; ?></p>
+											</div>
+										</td>
+									</tr>
+									<?php endif; ?>
+									
+									<!-- Unternehmensname -->
+									<?php if ( ! empty( $ticket['WooCommerceEventsAttendeeCompany'] ) ) : ?>
+									<tr>
+										<td style="text-align:center;">
+											<h3 style="margin: 0; color: #909090; direction: ltr; font-family: Helvetica Neue, Helvetica, Arial, sans-serif; font-size: 13px; font-weight: 700; letter-spacing: normal; line-height: 200%; text-align: left; margin-top: 0; margin-bottom: 0;"><span class="tinyMce-placeholder"><?php _e( 'Company:', 'woocommerce-events' ); ?></span></h3>
+										</td>
+										<td>
+											<div style="color:#0a0a0e;direction:ltr;font-family:Helvetica Neue, Helvetica, Arial, sans-serif;font-size:13px;font-weight:400;letter-spacing:0px;line-height:200%;text-align:left;">
+												<p style="margin: 0;"><?php echo $ticket['WooCommerceEventsAttendeeCompany']; ?></p>
+											</div>
+										</td>
+									</tr>
+									<?php endif; ?>
+									
 									<!-- PREIS -->
 									<tr>
 										<td style="text-align:center;">
-											<h3 style="margin: 0; color: #909090; direction: ltr; font-family: Helvetica Neue, Helvetica, Arial, sans-serif; font-size: 13px; font-weight: 700; letter-spacing: normal; line-height: 200%; text-align: left; margin-top: 0; margin-bottom: 0;"><span class="tinyMce-placeholder">Preis</span></h3>
+											<h3 style="margin: 0; color: #909090; direction: ltr; font-family: Helvetica Neue, Helvetica, Arial, sans-serif; font-size: 13px; font-weight: 700; letter-spacing: normal; line-height: 200%; text-align: left; margin-top: 0; margin-bottom: 0;"><span class="tinyMce-placeholder">Preis:</span></h3>
 										</td>
 										<td style="text-align:center;">
 											<div style="color:#0a0a0e;direction:ltr;font-family:Helvetica Neue, Helvetica, Arial, sans-serif;font-size:13px;font-weight:400;letter-spacing:0px;line-height:200%;text-align:left;">
@@ -127,29 +155,31 @@
 									<?php endif; ?> 
 
 									<!-- MULTI-DAY DETAILS -->
-									
 									<?php if ( $ticket['WooCommerceEventsTicketDisplayMultiDay'] == 'on' ) : ?>
 										<?php $x = 1; ?>
 										<?php $y = 0; ?>    
 										<?php foreach ( $ticket['WooCommerceEventsSelectDate'] as $date ) : ?>
 											<tr>
-												<td valign="top" width="160px" style="font-family:<?php echo $font_family; ?>">
+												<td style="text-align:center;">
+												<h3 style="margin: 0; color: #909090; direction: ltr; font-family: Helvetica Neue, Helvetica, Arial, sans-serif; font-size: 13px; font-weight: 700; letter-spacing: normal; line-height: 200%; text-align: left; margin-top: 0; margin-bottom: 0;"><span class="tinyMce-placeholder">
 													<?php printf( __( '%1$s %2$d: ', 'woocommerce-events' ), $ticket['dayTerm'], $x ); ?>
 												</td>
-												<td valign="top" style="color:#222; font-family:<?php echo $font_family; ?>">
-													<?php echo esc_attr( $date ); ?><br /> 
+												<td style="text-align:center;">
+													<div style="color:#0a0a0e;direction:ltr;font-family:Helvetica Neue, Helvetica, Arial, sans-serif;font-size:13px;font-weight:400;letter-spacing:0px;line-height:200%;text-align:left;"><?php echo esc_attr( $date ); ?> 
 													<?php if ( ! empty( $ticket['WooCommerceEventsSelectDateHour'][ $y ] ) && ! empty( $ticket['WooCommerceEventsSelectDateMinutes'][ $y ] ) ) : ?>
 														<?php echo $ticket['WooCommerceEventsSelectDateHour'][ $y ] . ':' . $ticket['WooCommerceEventsSelectDateMinutes'][ $y ]; ?><?php echo( isset( $ticket['WooCommerceEventsSelectDatePeriod'][ $y ] ) ) ? ' ' . $ticket['WooCommerceEventsSelectDatePeriod'][ $y ] : ''; ?>
 													<?php endif; ?>
 													<?php if ( ! empty( $ticket['WooCommerceEventsSelectDateHourEnd'][ $y ] ) && ! empty( $ticket['WooCommerceEventsSelectDateMinutesEnd'][ $y ] ) ) : ?>
 														<?php echo ' - ' . $ticket['WooCommerceEventsSelectDateHourEnd'][ $y ] . ':' . $ticket['WooCommerceEventsSelectDateMinutesEnd'][ $y ]; ?><?php echo( isset( $ticket['WooCommerceEventsSelectDatePeriodEnd'][ $y ] ) ) ? ' ' . $ticket['WooCommerceEventsSelectDatePeriodEnd'][ $y ] : ''; ?>
 													<?php endif; ?>
+													</p></div>
 												</td>
 											</tr>												
 											<?php $x++; ?>
 											<?php $y++; ?>
 										<?php endforeach; ?>
 									<?php endif; ?>
+									
 									
 								</table>
 							</td>
